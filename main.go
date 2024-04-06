@@ -1,14 +1,13 @@
 package main
 
 import (
-	"ecommerce-project/seeder"
-	"fmt"
+	"ecommerce-project/controllers"
+	"net/http"
 )
 
 func main() {
-	err := seeder.SeedData()
-	if err != nil {
-		fmt.Println("Error seeding data:", err)
-	}
+	router := http.NewServeMux()
+	router.HandleFunc("/api/v1/products", controllers.ProductsController)
 
+	http.ListenAndServe(":4000", router)
 }
